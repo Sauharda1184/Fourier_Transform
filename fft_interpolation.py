@@ -21,7 +21,7 @@ Those numbers build a wavy curve S that passes through every data point:
            + [a_(m-1)*cos((m-1)*z) + b_(m-1)*sin((m-1)*z)]
 
 How to run it:
-    python3 fft_interpolation.py data/example1.csv
+    python3 fft_interpolation.py data/sample_256.csv
 """
 
 import cmath

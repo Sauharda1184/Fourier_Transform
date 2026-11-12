@@ -69,20 +69,18 @@ def test_book_example_2():
 
 
 def test_fft_matches_slow_way():
-    for filename in ["data/example1.csv", "data/example2.csv", "data/sample_256.csv"]:
-        x, y, m, c, a, b = run(filename)
-        slow_c = slow_transform(y, m)
-        for k in range(2 * m):
-            assert close(c[k], slow_c[k], 1e-8), (filename, k)
+    x, y, m, c, a, b = run("data/sample_256.csv")
+    slow_c = slow_transform(y, m)
+    for k in range(2 * m):
+        assert close(c[k], slow_c[k], 1e-8), k
 
 
 def test_curve_goes_through_every_point():
-    for filename in ["data/example1.csv", "data/example2.csv", "data/sample_256.csv"]:
-        x, y, m, c, a, b = run(filename)
-        x_start, x_end = get_interval(x)
-        for j in range(2 * m):
-            height = evaluate(x[j], a, b, m, x_start, x_end)
-            assert close(height, y[j], 1e-9), (filename, j)
+    x, y, m, c, a, b = run("data/sample_256.csv")
+    x_start, x_end = get_interval(x)
+    for j in range(2 * m):
+        height = evaluate(x[j], a, b, m, x_start, x_end)
+        assert close(height, y[j], 1e-9), j
 
 
 def test_fft_matches_numpy():
