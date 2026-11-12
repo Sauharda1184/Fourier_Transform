@@ -70,7 +70,7 @@ def check_data(x, y):
 
     The book calls the number of points 2m, and needs m = 2^p.
     So the number of points must be 2, 4, 8, 16, 32, 64, 128, 256, 512, ...
-    The x-values must also be evenly spaced, like marks on a ruler.
+    The x-values must also be evenly spaced.
     """
     number_of_points = len(y)
     if number_of_points < 2:

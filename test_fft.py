@@ -68,6 +68,22 @@ def test_book_example_2():
     assert close(b[3], -0.0113738, 1e-7)
 
 
+def test_known_waves():
+    # The data is 2 + 3*cos(x) + sin(2x) + 0.5*cos(5x), so we know exactly
+    # how much of each wave the program should find.
+    x, y, m, c, a, b = run("data/known_waves_256.csv")
+    expected_a = [0.0] * (m + 1)
+    expected_b = [0.0] * m
+    expected_a[0] = 4.0   # the curve uses a_0/2, and 4/2 = 2
+    expected_a[1] = 3.0
+    expected_b[2] = 1.0
+    expected_a[5] = 0.5
+    for k in range(m + 1):
+        assert close(a[k], expected_a[k], 1e-9), k
+    for k in range(1, m):
+        assert close(b[k], expected_b[k], 1e-9), k
+
+
 def test_fft_matches_slow_way():
     x, y, m, c, a, b = run("data/sample_256.csv")
     slow_c = slow_transform(y, m)
@@ -119,6 +135,7 @@ def test_uneven_spacing_is_rejected():
 tests = [
     test_book_example_1,
     test_book_example_2,
+    test_known_waves,
     test_fft_matches_slow_way,
     test_curve_goes_through_every_point,
     test_fft_matches_numpy,
