@@ -47,9 +47,19 @@ def sample(x):
     # A wiggly made-up function for a big dataset
     return math.exp(-x) * math.sin(5 * x) + 0.5 * x
 
+def sawtooth(x):
+    # A sawtooth wave for testing a common Fourier series example
+    return (x % (math.pi / 2)) * 2/math.pi
+
+def square_wave(x):
+    # A square wave for testing a common Fourier series example
+    return 1 if (x % (math.pi / 2)) < math.pi / 4 else -1
+
 
 os.makedirs("data", exist_ok=True)
 write_file("data/example1.csv", -math.pi, math.pi, 4, example1)
 write_file("data/example2.csv", 0, 2, 8, example2)
 write_file("data/known_waves_256.csv", -math.pi, math.pi, 256, known_waves)
 write_file("data/sample_256.csv", 0, 4, 256, sample)
+write_file("data/sawtooth_256.csv", -math.pi, math.pi, 64, sawtooth)
+write_file("data/square_wave_256.csv", -math.pi, math.pi, 64, square_wave)
