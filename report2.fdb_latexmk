@@ -1,13 +1,13 @@
 # Fdb version 4
-["biber report2"] 0 "report2.bcf" "report2.bbl" "report2" 1794933885.3383 -1
-  "report2.bcf" 1794933885 108523 f8a57b1203b1c549863ead028f3aaae0 "pdflatex"
-  "report2bib.bib" 1794932901 869 5a364f0d0dc5d4f603a5059280fb7f26 ""
+["biber report2"] 1795041911.47441 "report2.bcf" "report2.bbl" "report2" 1795041926.99254 0
+  "report2.bcf" 1795041926 108586 38f098465b404ecbd31767b06cec5979 "pdflatex"
+  "report2bib.bib" 1795041889 1069 216ae5167972f2db92c603afb3f095b4 ""
   (generated)
   "report2.bbl"
   "report2.blg"
   (rewritten before read)
-["pdflatex"] 1794933883.77811 "c:/Users/mathm/OneDrive/Documents/Personal/Gray/Graduate_School/Homework/Project 2/New folder/Fourier_Transform/report2.tex" "report2.pdf" "report2" 1794933885.33898 0
-  "c:/Users/mathm/OneDrive/Documents/Personal/Gray/Graduate_School/Homework/Project 2/New folder/Fourier_Transform/report2.tex" 1794933882 2233 1ba305b7152bfc95d84d459a24282a42 ""
+["pdflatex"] 1795041923.44951 "c:/Users/mathm/OneDrive/Documents/Personal/Gray/Graduate_School/Homework/Project 2/New folder/Fourier_Transform/report2.tex" "report2.pdf" "report2" 1795041926.99444 0
+  "c:/Users/mathm/OneDrive/Documents/Personal/Gray/Graduate_School/Homework/Project 2/New folder/Fourier_Transform/report2.tex" 1795041906 2285 8ff766ad1e06a389f322a70c2a7edc30 ""
   "c:/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1784697046 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1784695163 1004 54797486969f23fa377b128694d548df ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1784695163 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -88,11 +88,11 @@
   "c:/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1784728810 5617745 5a96a9cae614e381737231b181ff4713 ""
   "c:/texlive/2026/texmf-var/web2c/pdftex/pdflatex.fmt" 1784729003 3656601 e2e72da3d48c324874e2b21dfb3696f7 ""
   "c:/texlive/2026/texmf.cnf" 1784728782 713 e69b156964470283e0530f5060668171 ""
-  "report2.aux" 1794933885 507 c145a5170b89e4ca7c28e930ad43cb58 "pdflatex"
-  "report2.bbl" 1794933061 1747 828bc73dde9a6b6aaff7370f607b75d0 "biber report2"
-  "report2.out" 1794933885 137 32629d2fd4410f7e11abf859f81e0623 "pdflatex"
-  "report2.run.xml" 1794933885 2326 4d719ecbb07b357d4ee9d7f05f33ae09 "pdflatex"
-  "report2.tex" 1794933882 2233 1ba305b7152bfc95d84d459a24282a42 ""
+  "report2.aux" 1795041926 638 94ef070120d98bf00ef05b9d04aafae8 "pdflatex"
+  "report2.bbl" 1795041916 3193 470e909bc09203c089bd48753491ba25 "biber report2"
+  "report2.out" 1795041926 137 32629d2fd4410f7e11abf859f81e0623 "pdflatex"
+  "report2.run.xml" 1795041926 2326 4d719ecbb07b357d4ee9d7f05f33ae09 "pdflatex"
+  "report2.tex" 1795041906 2285 8ff766ad1e06a389f322a70c2a7edc30 ""
   (generated)
   "report2.aux"
   "report2.bcf"

@@ -45,6 +45,35 @@
       \field{title}{Numerical methods for scientists and engineers}
       \field{year}{1962}
     \endentry
+    \entry{textbook}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=7b023abaf70637a5e7ef206dfbffdc93}{%
+           family={R.\bibnamedelimi L.\bibnamedelimi Burden},
+           familyi={R\bibinitperiod\bibinitdelim L\bibinitperiod\bibinitdelim B\bibinitperiod},
+           given={A.\bibnamedelimi M.\bibnamedelimi Burden},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim B\bibinitperiod},
+           suffix={D.\bibnamedelimi J.\bibnamedelimi Faires},
+           suffixi={D\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cengage Learning}%
+      }
+      \strng{namehash}{7b023abaf70637a5e7ef206dfbffdc93}
+      \strng{fullhash}{7b023abaf70637a5e7ef206dfbffdc93}
+      \strng{fullhashraw}{7b023abaf70637a5e7ef206dfbffdc93}
+      \strng{bibnamehash}{7b023abaf70637a5e7ef206dfbffdc93}
+      \strng{authorbibnamehash}{7b023abaf70637a5e7ef206dfbffdc93}
+      \strng{authornamehash}{7b023abaf70637a5e7ef206dfbffdc93}
+      \strng{authorfullhash}{7b023abaf70637a5e7ef206dfbffdc93}
+      \strng{authorfullhashraw}{7b023abaf70637a5e7ef206dfbffdc93}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{10th}
+      \field{title}{Numerical Analysis}
+      \field{year}{2016}
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
