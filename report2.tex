@@ -1,0 +1,67 @@
+
+
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage[
+backend=biber,
+style=numeric,
+sorting=ynt
+]{biblatex}
+\addbibresource{report2bib.bib}
+
+\title{C\# Implementation of the Fast Fourier Transform (FFT) Algorithm}
+\author{Ike Halderan, Josiah Hoppe, Jacari Jellum, Sauharda Shrestha}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+%\begin{abstract}
+%This is a short abstract summarizing your article.
+%\end{abstract}
+
+\section*{Introduction}
+
+\section*{Mathematical Validity}
+We will first show that any function approximated at $2n$ points can be approximated by a Fourier series, by reprroducing the approach shown in \cite{hamming}. The set of functions 
+\[1, \cos x, \cos 2x, \ldots, \cos \left(n-1\right)x, \cos nx\]
+\[\sin x, \sin 2x, \dots, \sin \left(n-1\right)x, \sin nx\]
+
+is orthogonal over the discrete set of points 
+
+\[0, \frac{\pi}{n}, \frac{2\pi}{n}, \ldots, \frac{\left(2n-1\right)\pi}{n}\]
+
+The orthogonality relations, when $k \leq n, m \leq n$, are
+
+\begin{align*}
+    \sum_{x=0}^{2n-1} \sin \frac{\pi}{n}kx \sin \frac{\pi}{n}mx & = \begin{cases}
+        0 & \text{if } k \neq m \\
+        n & \text{if } k = m \neq 0 \\        
+    \end{cases} \\
+    \sum_{x=0}^{2n-1} \sin \frac{\pi}{n}kx \cos \frac{\pi}{n}mx & = 0 \\
+    \sum_{x=0}^{2n-1} \cos \frac{\pi}{n}kx \cos \frac{\pi}{n}mx & = \begin{cases}
+        0 & \text{if } k \neq m \\
+        n & \text{if } k = m \neq 0 \\
+    \end{cases}
+\end{align*}
+
+Suppose $f(x)$ is an arbitrary function. Since each of the above functions is orthogonal to each other, we can write $f(x)$ as a linear combination of these functions, so
+
+\[f(x) = \frac{a_0}{2} + \sum_{k=1}^{n-1} \left( a_k \cos \frac{\pi}{n}kx + b_k \sin \frac{\pi}{n}kx \right) + \frac{a_n}{2} \cos \frac{\pi}{n}nx.\]
+
+Then, we can use the orthogonality relations to solve for the coefficients $a_k$ and $b_k$. For example, to solve for $a_k$, we multiply both sides of the equation by $\cos \frac{\pi}{n}mx$ and sum over all $x$ from $0$ to $2n-1$. Thus, we have
+
+
+\section*{Algorithm Overview}
+
+
+\section*{Conclusion}
+
+
+\printbibliography[
+heading=bibintoc,
+title={Whole bibliography}
+]
+
+\end{document}
