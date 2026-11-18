@@ -8,6 +8,7 @@ Run make_sample_data.py first so the data files exist.
 """
 
 import cmath
+import math
 
 from fft_interpolation import (
     check_data,
@@ -84,6 +85,50 @@ def test_known_waves():
         assert close(b[k], expected_b[k], 1e-9), k
 
 
+def test_sawtooth():
+    # The sawtooth climbs from 0 towards 1, drops back to 0, and repeats
+    # 4 times across the interval. Because it repeats 4 times, only waves
+    # with k = 4, 8, 12, ... can appear. For these sampled points the exact
+    # answer is known:
+    #     a_0 = 1 - 2/m          (twice the average height)
+    #     a_k = -2/m             for k = 4, 8, 12, ...
+    #     b_k = -(2/m) / tan(pi*k / (2m))   for k = 4, 8, 12, ...
+    # For small k, b_k is close to the textbook Fourier series value -4/(pi*k).
+    x, y, m, c, a, b = run("data/sawtooth_256.csv")
+    expected_a = [0.0] * (m + 1)
+    expected_b = [0.0] * m
+    expected_a[0] = 1 - 2 / m
+    for k in range(4, m + 1, 4):
+        expected_a[k] = -2 / m
+        if k < m:
+            expected_b[k] = -(2 / m) / math.tan(math.pi * k / (2 * m))
+    for k in range(m + 1):
+        assert close(a[k], expected_a[k], 1e-9), k
+    for k in range(1, m):
+        assert close(b[k], expected_b[k], 1e-9), k
+
+
+def test_square_wave():
+    # The square wave is 1 for half of each repeat and -1 for the other half,
+    # and it repeats 4 times. Only the odd multiples of 4 (k = 4, 12, 20, ...)
+    # can appear. For these sampled points the exact answer is known:
+    #     a_k = 8/m              for k = 4, 12, 20, ...
+    #     b_k = (8/m) / tan(pi*k / (2m))    for k = 4, 12, 20, ...
+    # and every other coefficient, including a_0, is 0.
+    # For small k, b_k is close to the textbook Fourier series value 16/(pi*k).
+    x, y, m, c, a, b = run("data/square_wave_256.csv")
+    expected_a = [0.0] * (m + 1)
+    expected_b = [0.0] * m
+    for k in range(4, m + 1, 8):
+        expected_a[k] = 8 / m
+        if k < m:
+            expected_b[k] = (8 / m) / math.tan(math.pi * k / (2 * m))
+    for k in range(m + 1):
+        assert close(a[k], expected_a[k], 1e-9), k
+    for k in range(1, m):
+        assert close(b[k], expected_b[k], 1e-9), k
+
+
 def test_fft_matches_slow_way():
     x, y, m, c, a, b = run("data/sample_256.csv")
     slow_c = slow_transform(y, m)
@@ -136,6 +181,8 @@ tests = [
     test_book_example_1,
     test_book_example_2,
     test_known_waves,
+    test_sawtooth,
+    test_square_wave,
     test_fft_matches_slow_way,
     test_curve_goes_through_every_point,
     test_fft_matches_numpy,
