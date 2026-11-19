@@ -58,7 +58,27 @@ To show that these relations hold, we can use the trigonometric identities
     \cos A \cos B & = \frac{1}{2} \left( \cos(A-B) + \cos(A+B) \right).
 \end{align*}
 
-{\textbf Proposition 1} The orthogonality relation in \ref{ortho sine sine} holds.
+\textbf{Proposition 1:} The orthogonality relation in (\ref{ortho sine sine}) holds.
+
+First, suppose that $k \neq m$. Then, we have
+\begin{align*}
+    \sum_{x=0}^{2n-1} \sin \frac{\pi}{n}kx \sin \frac{\pi}{n}mx & = \sum_{x=0}^{2n-1}\frac{1}{2}\biggl( \cos\left(\frac{\pi}{n}kx-\frac{\pi}{n}mx\right) - \cos\left(\frac{\pi}{n}kx+\frac{\pi}{n}mx\right)\biggr) \\
+    & = \frac{1}{2}\sum_{x=0}^{2n-1}\biggl( \left( \cos\left(\frac{\pi}{n}x\left(k-m\right)\right)\right) - \cos\left(\frac{\pi}{n}x\left(k+m\right) \right)\biggr) \\
+\end{align*}
+
+\[\sum_{x=0}^{2n-1} \sin \frac{\pi}{n}kx \sin \frac{\pi}{n}mx = \begin{cases}
+        0 & \text{if } k \neq m \\
+        n & \text{if } k = m \neq 0 \\        
+    \end{cases}\]
+
+
+$\blacksquare$
+
+\textbf{Proposition 2:} The orthogonality relation in (\ref{ortho sine cosine}) holds.
+
+$\blacksquare$
+
+\textbf{Proposition 3:} The orthogonality relation in (\ref{ortho cosine cosine}) holds.
 
 $\blacksquare$
 
