@@ -8,6 +8,7 @@ backend=biber,
 style=numeric,
 sorting=ynt
 ]{biblatex}
+\usepackage{amssymb}
 \addbibresource{report2bib.bib}
 
 \title{C\# Implementation of the Fast Fourier Transform (FFT) Algorithm}
@@ -32,23 +33,34 @@ We will first show that any function approximated at $2n$ points can be approxim
 \end{array}\]
 
 
-is orthogonal over the discrete set of points 
+is orthogonal over the set of $2n$ points  
 
-\[0, \frac{\pi}{n}, \frac{2\pi}{n}, \ldots, \frac{\left(2n-1\right)\pi}{n}\]
+\[-\pi, -\pi + \frac{\pi}{2n}, -\pi + \frac{\pi}{n}, \ldots, \pi - \frac{\pi}{n},\pi - \frac{\pi}{2n}\]
 
 The orthogonality relations, when $k \leq n, m \leq n$, are
 
-\begin{align*}
+\begin{align}
     \sum_{x=0}^{2n-1} \sin \frac{\pi}{n}kx \sin \frac{\pi}{n}mx & = \begin{cases}
         0 & \text{if } k \neq m \\
         n & \text{if } k = m \neq 0 \\        
-    \end{cases} \\
-    \sum_{x=0}^{2n-1} \sin \frac{\pi}{n}kx \cos \frac{\pi}{n}mx & = 0 \\
+    \end{cases} \label{ortho sine sine}\\
+    \sum_{x=0}^{2n-1} \sin \frac{\pi}{n}kx \cos \frac{\pi}{n}mx & = 0 \label{ortho sine cosine}\\
     \sum_{x=0}^{2n-1} \cos \frac{\pi}{n}kx \cos \frac{\pi}{n}mx & = \begin{cases}
         0 & \text{if } k \neq m \\
         n & \text{if } k = m \neq 0 \\
-    \end{cases}
+    \end{cases} \label{ortho cosine cosine}
+\end{align}
+
+To show that these relations hold, we can use the trigonometric identities
+\begin{align*}
+    \sin A \sin B & = \frac{1}{2} \left( \cos(A-B) - \cos(A+B) \right) \\
+    \sin A \cos B & = \frac{1}{2} \left( \sin(A-B) + \sin(A+B) \right) \\
+    \cos A \cos B & = \frac{1}{2} \left( \cos(A-B) + \cos(A+B) \right).
 \end{align*}
+
+{\textbf Proposition 1} The orthogonality relation in \ref{ortho sine sine} holds.
+
+$\blacksquare$
 
 Suppose $f(x)$ is an arbitrary function. Since each of the above functions is orthogonal to each other, we can write $f(x)$ as a linear combination of these functions, so
 
