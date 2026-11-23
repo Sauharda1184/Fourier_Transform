@@ -84,10 +84,30 @@ $\blacksquare$
 
 Suppose $f(x)$ is an arbitrary function. Since each of the above functions is orthogonal to each other, we can write $f(x)$ as a linear combination of these functions, so
 
-\[f(x) = \frac{a_0}{2} + \sum_{k=1}^{n-1} \left( a_k \cos \frac{\pi}{n}kx + b_k \sin \frac{\pi}{n}kx \right) + \frac{a_n}{2} \cos \frac{\pi}{n}nx.\]
+\[f(x) = \frac{a_0}{2} + \sum_{k=1}^{n-1} \left( a_k \cos \frac{\pi}{n}kx + b_k \sin \frac{\pi}{n}kx \right) + \frac{a_n}{2} \cos \frac{\pi}{n}mx.\]
 
 Then, we can use the orthogonality relations to solve for the coefficients $a_k$ and $b_k$. For example, to solve for $a_k$, we multiply both sides of the equation by $\cos \frac{\pi}{n}mx$ and sum over all $x$ from $0$ to $2n-1$. Thus, we have
 
+\begin{align*}
+    \sum_{j=1}^{2n-1} f(x) \cos \frac{\pi}{n}mx = & \sum_{j=1}^{2n-1} \left(\frac{a_0}{2} + \sum_{k=1}^{n-1} \left( a_k \cos \frac{\pi}{n}kx + b_k \sin \frac{\pi}{n}kx \right) + \frac{a_n}{2} \cos \frac{\pi}{n}mx\right)\left(\cos \frac{\pi}{n}mx\right) \\
+    = & \sum_{j=1}^{2n-1} \frac{a_0}{2}\cos \frac{\pi}{n}mx + \sum_{j=1}^{2n-1}\sum_{k=1}^{n-1} \left( a_k \cos \frac{\pi}{n}kx\cos \frac{\pi}{n}mx + b_k \sin \frac{\pi}{n}kx \cos \frac{\pi}{n}mx\right)  \\
+    {} & + \sum_{j=1}^{2n-1}\frac{a_n}{2} \cos \frac{\pi}{n}mx\cos \frac{\pi}{n}mx \\
+    = 0 + na_m + 0
+    = na_m
+\end{align*}
+
+Likewise, from \cite{hamming}, we also have
+
+\[\sum_{k=0}^{2n-1} f(x) = na_0\]
+\[\sum_{k=0}^{2n-1} f(x)\cos \pi x = na_n\]
+\[\sum_{k=0}^{2n-1} f(x) \sin \frac{\pi}{n}mk = nb_m\]
+
+Thus, the desired coefficients are given by
+
+\[a_k = \frac{1}{n} \sum_{j=0}^{2n-1} f(x) \cos \frac{\pi}{n}kx_j \text{ for }k=0, 1, 2, \ldots, n-1, n\]
+\[b_k = \frac{1}{n} \sum_{j=0}^{2n-1} f(x) \sin \frac{\pi}{n}kx_j \text{ for }k=1, 2, \ldots, n-1.\]
+
+These formulas work to find the coefficients we need, however, the time complexity is $O(n^2)$ \cite{brigham}. Finding a faster algorithm was vital to making it practical to use for all types of digital processing. In 1965, J. W. Cooley and J. W. Tukey published a paper on the algorithm known as the fast Fourier transform, which only as a time complexity of $O(n \log n)$ \cite{textbook}. Rather than use the above definitions for $a_k$ and $b_k$, a set of complex coefficients is first calculated, and $a_k$ and $b_k$ are defined from these complex coeffficients.
 
 \section*{Algorithm Overview}
 
