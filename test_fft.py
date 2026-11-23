@@ -9,6 +9,7 @@ Run make_sample_data.py first so the data files exist.
 
 import cmath
 import math
+import os
 
 from fft_interpolation import (
     check_data,
@@ -177,6 +178,34 @@ def test_uneven_spacing_is_rejected():
     assert False, "uneven spacing should have been rejected"
 
 
+def test_typo_in_first_data_row_is_rejected():
+    # Only the very first line may be a title. A word in the first data row
+    # is a mistake and must not be skipped quietly.
+    filename = "data/_test_typo.csv"
+    with open(filename, "w") as file:
+        file.write("x,y\n0,abc\n1,2\n2,3\n3,4\n4,5\n")
+    try:
+        read_data(filename)
+    except ValueError:
+        return
+    finally:
+        os.remove(filename)
+    assert False, "a typo in the first data row should have been rejected"
+
+
+def test_nan_is_rejected():
+    filename = "data/_test_nan.csv"
+    with open(filename, "w") as file:
+        file.write("x,y\n0,nan\n1,2\n2,3\n3,4\n")
+    try:
+        read_data(filename)
+    except ValueError:
+        return
+    finally:
+        os.remove(filename)
+    assert False, "nan should have been rejected"
+
+
 tests = [
     test_book_example_1,
     test_book_example_2,
@@ -188,6 +217,8 @@ tests = [
     test_fft_matches_numpy,
     test_bad_point_count_is_rejected,
     test_uneven_spacing_is_rejected,
+    test_typo_in_first_data_row_is_rejected,
+    test_nan_is_rejected,
 ]
 
 for test in tests:

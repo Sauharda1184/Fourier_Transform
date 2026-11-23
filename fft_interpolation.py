@@ -12,13 +12,27 @@ What it does, in plain words:
     4. Turns the result into the numbers a_0, a_1, ... and b_1, b_2, ...
     5. Prints those numbers and saves them to a file.
 
+The data:
+    The file holds 2m points (x_0, y_0), ..., (x_(2m-1), y_(2m-1)).
+    The x's are evenly spaced positions, and each y is the value measured
+    (or calculated) at that position. The FFT only uses the y's; the x's
+    tell us where the curve lives. The book's formulas work on the interval
+    from -pi to pi, so each x is slid and stretched to a number z in that
+    interval, and the data stops one step short of the right-hand end.
+
 Those numbers build a wavy curve S that passes through every data point:
 
-    S(z) = a_0/2 + a_m*cos(m*z)/2
+    S(z) = (a_0 + a_m*cos(m*z)) / 2
            + [a_1*cos(1*z) + b_1*sin(1*z)]
            + [a_2*cos(2*z) + b_2*sin(2*z)]
            + ...
            + [a_(m-1)*cos((m-1)*z) + b_(m-1)*sin((m-1)*z)]
+
+    This is the book's interpolating polynomial S_m. The two terms in the
+    first line are halved because, over the 2m data points, cos(0*z) and
+    cos(m*z) are always +1 or -1, so they count twice as much as the other
+    waves when the a's are worked out. There is no b_m because sin(m*z) is
+    0 at every data point.
 
 How to run it:
     python3 fft_interpolation.py data/sample_256.csv
@@ -34,15 +48,19 @@ def read_data(filename):
     """Read the points from a file and return two lists: the x's and the y's.
 
     The file has one point per line, written as "x,y". The first line may be
-    a title line such as "x,y"; it is skipped.
+    a title line such as "x,y"; it is skipped. Every other line must hold two
+    numbers.
     """
     x = []
     y = []
+    first_line = True
     with open(filename) as file:
         for line_number, row in enumerate(csv.reader(file), start=1):
             # Skip empty lines.
             if len(row) == 0 or "".join(row).strip() == "":
                 continue
+            is_first_line = first_line
+            first_line = False
             if len(row) != 2:
                 raise ValueError(
                     f"Line {line_number} of {filename} should have exactly "
@@ -52,13 +70,19 @@ def read_data(filename):
                 x_value = float(row[0])
                 y_value = float(row[1])
             except ValueError:
-                # Words instead of numbers are fine on the first line only,
+                # Words instead of numbers are allowed on the first line only,
                 # because that is the title line.
-                if len(x) == 0:
+                if is_first_line:
                     continue
                 raise ValueError(
                     f"Line {line_number} of {filename} has something that "
                     f"is not a number: {row}"
+                )
+            # float() also accepts "nan" and "inf", which would ruin every answer.
+            if not (math.isfinite(x_value) and math.isfinite(y_value)):
+                raise ValueError(
+                    f"Line {line_number} of {filename} has a value that is not "
+                    f"an ordinary number: {row}"
                 )
             x.append(x_value)
             y.append(y_value)
@@ -76,21 +100,19 @@ def check_data(x, y):
     if number_of_points < 2:
         raise ValueError("The file needs at least 2 data points.")
 
-    # Find m and p so that number_of_points = 2m and m = 2^p.
-    m = number_of_points // 2
+    # Since number_of_points = 2m and m = 2^p, number_of_points = 2^(p+1).
+    # Keep doubling until we reach number_of_points (or go past it).
     p = 0
-    while 2 ** p < m:
+    while 2 ** (p + 1) < number_of_points:
         p = p + 1
-    if 2 * m != number_of_points or 2 ** p != m:
-        # Find the closest power of 2 below, to suggest it in the message.
-        smaller = 2
-        while smaller * 2 <= number_of_points:
-            smaller = smaller * 2
+    if 2 ** (p + 1) != number_of_points:
+        # We went past it, so it is between 2^p and 2^(p+1).
         raise ValueError(
             f"The file has {number_of_points} points, but the FFT needs the "
             f"number of points to be a power of 2 "
-            f"(for example {smaller} or {2 * smaller})."
+            f"(for example {2 ** p} or {2 ** (p + 1)})."
         )
+    m = number_of_points // 2
 
     # Check the gap between neighbouring x-values is always the same.
     gap = x[1] - x[0]
